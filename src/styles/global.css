@@ -1,0 +1,656 @@
+/* ===== PUDRA BEAUTY ROOM — GLOBAL STYLES ===== */
+
+:root {
+  /* Color Palette — Powder Pink Universe */
+  --pink-100: #fff0f3;
+  --pink-200: #fde0e6;
+  --pink-300: #f8c4cf;
+  --pink-400: #f2a8b6;
+  --pink-500: #e8899a;
+  --pink-600: #d4697c;
+  --pink-700: #b84d63;
+  --blush:    #f5d5da;
+  --petal:    #fce8ec;
+  --cream:    #fdf8f5;
+  --ivory:    #fefaf8;
+  --warm-white: #fffbf9;
+  --charcoal:  #1a1a1a;
+  --soft-dark: #2d2020;
+  --muted:     #8a7070;
+  --glass:     rgba(255,240,243,0.6);
+  --glass-border: rgba(242,168,182,0.3);
+
+  /* Typography */
+  --font-display: 'DM Serif Display', 'Cormorant Garamond', serif;
+  --font-serif: 'Cormorant Garamond', serif;
+  --font-sans: 'Jost', sans-serif;
+
+  /* Spacing */
+  --section-padding: 120px 0;
+  --container-max: 1440px;
+  --container-pad: 0 80px;
+
+  /* Transitions */
+  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --transition: 0.6s var(--ease-smooth);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--warm-white);
+  color: var(--charcoal);
+  overflow-x: hidden;
+  cursor: default;
+  cursor: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== CUSTOM CURSOR ===== */
+.cursor {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: var(--pink-500);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.25s, height 0.25s, background 0.25s, opacity 0.25s;
+  mix-blend-mode: multiply;
+}
+
+.cursor-follower {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid var(--pink-400);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 0.12s ease, height 0.12s ease, border-color 0.2s;
+  mix-blend-mode: multiply;
+}
+
+.cursor.hover { width: 20px; height: 20px; background: var(--pink-600); }
+.cursor-follower.hover { width: 56px; height: 56px; border-color: var(--pink-500); opacity: 0.55; }
+
+/* ===== SCROLLBAR ===== */
+/* Scope ONLY to html — prevents inner element scrollbars */
+html::-webkit-scrollbar       { width: 4px; }
+html::-webkit-scrollbar-track { background: var(--cream); }
+html::-webkit-scrollbar-thumb { background: var(--pink-400); border-radius: 2px; }
+/* Hide scrollbar on every other element */
+*:not(html)::-webkit-scrollbar { width: 0 !important; height: 0 !important; display: none !important; }
+*:not(html) { scrollbar-width: none !important; -ms-overflow-style: none !important; }
+
+/* ===== SELECTION ===== */
+::selection { background: var(--pink-300); color: var(--soft-dark); }
+
+/* ===== TYPOGRAPHY ===== */
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 400; line-height: 1.1; }
+p { font-family: var(--font-sans); line-height: 1.7; font-weight: 300; }
+a { text-decoration: none; color: inherit; }
+
+/* ===== UTILITIES ===== */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: var(--container-pad);
+}
+
+@media (max-width: 1024px) {
+  :root { --container-pad: 0 40px; }
+}
+@media (max-width: 768px) {
+  :root { --container-pad: 0 24px; --section-padding: 80px 0; }
+  body { cursor: auto; }
+  .cursor, .cursor-follower { display: none !important; }
+}
+
+/* ===== PAGE TRANSITIONS ===== */
+.page-enter { opacity: 0; transform: translateY(20px); }
+.page-enter-active { opacity: 1; transform: translateY(0); transition: all 0.6s var(--ease-expo); }
+.page-exit { opacity: 1; }
+.page-exit-active { opacity: 0; transition: opacity 0.3s; }
+
+/* ===== NOISE TEXTURE OVERLAY ===== */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9990;
+  opacity: 0.4;
+}
+
+/* ===== BUTTON BASE ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: var(--charcoal);
+  color: var(--warm-white);
+  padding: 18px 40px;
+  border: none;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--pink-500);
+  transform: translateX(-101%);
+  transition: transform 0.5s var(--ease-expo);
+}
+
+.btn-primary:hover::before { transform: translateX(0); }
+.btn-primary:hover { color: white; }
+.btn-primary span { position: relative; z-index: 1; }
+
+.btn-outline {
+  background: transparent;
+  color: var(--charcoal);
+  padding: 16px 38px;
+  border: 1px solid var(--charcoal);
+}
+.btn-outline:hover {
+  background: var(--charcoal);
+  color: white;
+}
+
+/* ===== SECTION LABEL ===== */
+.section-label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--pink-600);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.section-label::before {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--pink-400);
+}
+
+/* ===== FADE-IN ANIMATION ===== */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s var(--ease-expo), transform 0.8s var(--ease-expo);
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in {
+  opacity: 0;
+  transition: opacity 1s var(--ease-smooth);
+}
+.fade-in.visible { opacity: 1; }
+
+/* ===== SPLIT TEXT ANIMATION ===== */
+.split-text span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 0.6s var(--ease-expo), transform 0.6s var(--ease-expo);
+}
+.split-text.visible span { opacity: 1; transform: translateY(0); }
+
+/* ===== GLASS CARD ===== */
+.glass-card {
+  background: rgba(255,248,250,0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 0;
+}
+
+/* ===== PINK LINE DECORATION ===== */
+.pink-line {
+  display: inline-block;
+  width: 60px;
+  height: 1px;
+  background: var(--pink-400);
+  vertical-align: middle;
+  margin: 0 16px;
+}
+
+/* Lightbox cursor fix */
+.lightbox-overlay { cursor: auto !important; }
+.lightbox-overlay button { cursor: pointer !important; }
+
+
+/* ==============================================
+   MOBILE & TABLET RESPONSIVE — Pudra Beauty Room
+   Breakpoints:
+     ≤1100px  tablet landscape
+     ≤900px   tablet portrait / large phone
+     ≤768px   phone landscape
+     ≤480px   phone portrait
+   ============================================== */
+
+/* ── Root tokens ── */
+@media (max-width: 768px) {
+  :root {
+    --container-pad: 0 20px;
+    --section-padding: 72px 0;
+  }
+}
+@media (max-width: 480px) {
+  :root {
+    --container-pad: 0 16px;
+    --section-padding: 56px 0;
+  }
+}
+
+/* ── Navbar ── */
+@media (max-width: 900px) {
+  nav { padding-left: 24px !important; padding-right: 24px !important; }
+}
+@media (min-width: 901px) {
+  nav { padding-left: 80px !important; padding-right: 80px !important; }
+  .hamburger { display: none !important; }
+}
+@media (max-width: 900px) {
+  .desktop-nav { display: none !important; }
+}
+
+/* ── Hero — split grid ── */
+@media (max-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    padding-top: 100px !important;
+    gap: 24px !important;
+    text-align: center;
+  }
+  .hero-grid > div:nth-child(2) {
+    height: 320px !important;
+    width: 320px !important;
+    margin: 0 auto;
+  }
+  .hero-stat-card { display: none !important; }
+  .hero-buttons   { justify-content: center !important; }
+}
+@media (max-width: 480px) {
+  .hero-grid > div:nth-child(2) {
+    height: 260px !important;
+    width: 260px !important;
+  }
+}
+
+/* ── Alina 3-col → responsive ── */
+@media (max-width: 1100px) {
+  .alina-3col { grid-template-columns: 1fr 1fr !important; }
+  .alina-3col > div:first-child { display: none !important; }
+}
+@media (max-width: 700px) {
+  .alina-3col { grid-template-columns: 1fr !important; }
+  .alina-3col > div:first-child { display: block !important; max-width: 220px; margin: 0 auto 32px; }
+}
+
+/* ── Services grid ── */
+@media (max-width: 768px) {
+  .services-grid   { grid-template-columns: 1fr !important; gap: 0 !important; }
+  .services-sticky { position: static !important; }
+}
+
+/* ── Stats ── */
+@media (max-width: 768px) {
+  .stats-grid { grid-template-columns: 1fr 1fr !important; gap: 20px !important; }
+}
+@media (max-width: 480px) {
+  .stats-grid { grid-template-columns: 1fr 1fr !important; }
+}
+
+/* ── WhyUs ── */
+@media (max-width: 768px) {
+  .whyus-grid { grid-template-columns: 1fr 1fr !important; gap: 16px !important; }
+}
+@media (max-width: 480px) {
+  .whyus-grid { grid-template-columns: 1fr !important; }
+}
+
+/* ── Testimonials ── */
+@media (max-width: 768px) {
+  .testimonials-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+  .testimonials-grid > div:last-child { display: none !important; }
+}
+
+/* ── Courses / GiftCert ── */
+@media (max-width: 768px) {
+  .courses-grid, .giftcert-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+}
+
+/* ── Service Detail ── */
+@media (max-width: 900px) {
+  .service-detail-content { grid-template-columns: 1fr !important; gap: 40px !important; }
+  .service-detail-sidebar { position: static !important; }
+}
+
+/* ── About ── */
+@media (max-width: 768px) {
+  .about-mission-grid,
+  .about-courses-grid,
+  .about-team-grid  { grid-template-columns: 1fr !important; gap: 40px !important; }
+  .about-stats-grid { grid-template-columns: 1fr 1fr !important; }
+  .about-values-grid{ grid-template-columns: 1fr !important; }
+  .about-team-inner {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+    padding: 28px 20px !important;
+  }
+}
+
+/* ── Pricing ── */
+@media (max-width: 768px) {
+  .pricing-row { grid-template-columns: 1fr auto !important; gap: 12px !important; }
+  .pricing-book-btn { display: none !important; }
+  .pricing-tabs button { padding: 14px 14px !important; font-size: 10px !important; }
+}
+
+/* ── Gallery ── */
+@media (max-width: 768px) {
+  .before-after-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+  .gallery-grid { columns: 2 !important; }
+}
+@media (max-width: 480px) {
+  .gallery-grid { columns: 1 !important; }
+}
+
+/* ── Contact ── */
+@media (max-width: 900px) {
+  .contact-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+}
+
+/* ── Booking ── */
+@media (max-width: 768px) {
+  .booking-step3-grid   { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .booking-summary      { display: none !important; }
+  .booking-services-grid{ grid-template-columns: 1fr 1fr !important; }
+  .booking-stepper      { padding: 16px 20px !important; }
+  .booking-stepper-label{ display: none !important; }
+}
+@media (max-width: 480px) {
+  .booking-services-grid{ grid-template-columns: 1fr !important; }
+}
+
+/* ── Footer ── */
+@media (max-width: 768px) {
+  .footer-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+  .footer-bottom { flex-direction: column !important; gap: 12px !important; text-align: center !important; }
+}
+
+/* ── Utility ── */
+@media (max-width: 768px) {
+  .hide-mobile   { display: none !important; }
+  .mobile-center { text-align: center !important; justify-content: center !important; }
+  .mobile-stack  { flex-direction: column !important; }
+}
+@media (min-width: 769px) {
+  .show-mobile-only { display: none !important; }
+}
+
+/* ── Section padding override (inline styles) ── */
+@media (max-width: 768px) {
+  section { padding-top: 64px !important; padding-bottom: 64px !important; }
+}
+@media (max-width: 480px) {
+  section { padding-top: 48px !important; padding-bottom: 48px !important; }
+}
+
+/* ── Hero-bottom row ── */
+@media (max-width: 768px) {
+  .hero-bottom-row { grid-template-columns: 1fr !important; gap: 24px !important; }
+}
+
+/* ── Prevent horizontal overflow everywhere ── */
+* { box-sizing: border-box; }
+body { overflow-x: hidden; }
+/* Не ставимо overflow на .container — ламає position:sticky */
+img, video, canvas { max-width: 100%; }
+
+
+/* ── Page scroll ── */
+html {
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--pink-400) var(--cream);
+}
+body {
+  overflow-y: visible;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+/* Prevent inner scrollbars on sections */
+section, main, article, aside {
+  overflow-x: clip;
+  overflow-y: visible;
+  max-width: 100%;
+}
+
+/* ── Hero powder above buttons on mobile ── */
+@media (max-width: 900px) {
+  .hero-buttons-desktop { display: none !important; }
+  .hero-buttons-mobile  {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    padding: 0 24px 48px !important;
+    width: 100%;
+  }
+  .hero-buttons-mobile a:first-child {
+    width: 100% !important;
+    text-align: center !important;
+    padding: 20px !important;
+  }
+  .hero-buttons-mobile a:last-child {
+    text-align: center !important;
+    display: block !important;
+  }
+  .hero-powder {
+    height: 420px !important;
+    width: 100% !important;
+    margin: -20px 0 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  .hero-stat-card { display: none !important; }
+
+  /* Текст hero — менші відступи */
+  .hero-grid > div:first-child {
+    padding: 0 24px !important;
+    text-align: center !important;
+    align-items: center !important;
+  }
+}
+@media (min-width: 901px) {
+  .hero-buttons-mobile { display: none !important; }
+}
+
+@media (max-width: 900px) {
+  /* Прибрати hint рухай мишею */
+  .hero-powder > div:last-of-type { display: none !important; }
+  /* Hero мінімальна висота — авто */
+  .hero-grid { min-height: auto !important; }
+}
+
+@media (max-width: 900px) {
+  /* Прибрати рожевий фон пудри */
+  .hero-powder-glow { display: none !important; }
+
+  /* Центрувати canvas пудри */
+  .hero-powder {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .hero-powder canvas {
+    width: 320px !important;
+    height: 320px !important;
+    margin: 0 auto !important;
+  }
+}
+
+/* ── Powder center fix ── */
+@media (max-width: 900px) {
+  .hero-powder {
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  .hero-powder > div {
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
+  .hero-powder canvas {
+    width: 340px !important;
+    height: 340px !important;
+    margin: 0 auto !important;
+    display: block !important;
+  }
+
+  /* Gift cert — ховаємо другий блок */
+  .gift-cert-second-block { display: none !important; }
+  .gift-cert-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── Before/After image enhancement ── */
+.before-after-img {
+  filter: contrast(1.08) saturate(1.1);
+  image-rendering: high-quality;
+}
+
+/* ── Hero mobile — critical fixes ── */
+@media (max-width: 900px) {
+  /* Ховаємо floating cards */
+  .hero-stat-card { display: none !important; }
+
+  /* Canvas пудри — показуємо */
+  .hero-powder {
+    height: 380px !important;
+    width: 100% !important;
+    position: relative !important;
+    display: block !important;
+  }
+
+  .hero-powder > div:first-child {
+    display: none !important; /* ховаємо glow */
+  }
+
+  .hero-powder canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+  }
+}
+
+/* ── Hero grid mobile — final fix ── */
+@media (max-width: 900px) {
+  .hero-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: visible !important;
+  }
+
+  /* Текстовий блок */
+  .hero-grid > div:first-child {
+    width: 100% !important;
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  /* Пудра */
+  .hero-powder {
+    width: 100% !important;
+    height: 380px !important;
+    min-height: 380px !important;
+    position: relative !important;
+    display: block !important;
+    overflow: visible !important;
+  }
+
+  /* Внутрішній div обгортки canvas */
+  .hero-powder > div:nth-child(2) {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .hero-powder canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .hero-stat-card { display: none !important; }
+  .hero-powder-glow { display: none !important; }
+  .hero-buttons-desktop { display: none !important; }
+  .hero-buttons-mobile { display: flex !important; }
+}
+
+/* ── Hero compact on mobile ── */
+@media (max-width: 900px) {
+  .hero-grid {
+    padding-top: 80px !important;
+    gap: 8px !important;
+  }
+  .hero-powder {
+    height: 280px !important;
+  }
+}
+
+@media (max-width: 900px) {
+  /* Менші відступи між елементами hero */
+  .hero-grid > div:first-child > * {
+    margin-bottom: 16px !important;
+  }
+  .hero-grid > div:first-child h1 {
+    margin-bottom: 16px !important;
+  }
+  .hero-grid > div:first-child p {
+    margin-bottom: 20px !important;
+  }
+}
