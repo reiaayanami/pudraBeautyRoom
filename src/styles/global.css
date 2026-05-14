@@ -674,3 +674,18 @@ section, main, article, aside {
     font-size: 36px !important;
   }
 }
+
+/* ── Powder size on small phones ── */
+@media (max-width: 480px) {
+  .hero-powder {
+    height: 220px !important;
+    min-height: 220px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .hero-powder {
+    height: 180px !important;
+    min-height: 180px !important;
+  }
+}
