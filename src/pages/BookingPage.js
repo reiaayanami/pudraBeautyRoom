@@ -110,6 +110,43 @@ export default function BookingPage() {
         </div>
       </section>
 
+      {/* ── Notice banner ── */}
+      <section style={{ background:'#1a1a1a', padding:'0' }}>
+        <div className="container">
+          <motion.div
+            initial={{ opacity:0, y:20 }}
+            animate={{ opacity:1, y:0 }}
+            transition={{ duration:0.8 }}
+            style={{ padding:'40px 0', display:'flex', alignItems:'center', justifyContent:'space-between', gap:32, flexWrap:'wrap' }}
+          >
+            <div style={{ display:'flex', alignItems:'flex-start', gap:20 }}>
+              <div style={{ width:44, height:44, borderRadius:'50%', border:'1.5px solid rgba(242,168,182,0.4)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, color:'#f2a8b6', fontSize:18, marginTop:2 }}>
+                ◈
+              </div>
+              <div>
+                <div style={{ fontFamily:"'Jost',sans-serif", fontSize:10, letterSpacing:'0.3em', textTransform:'uppercase', color:'#e8899a', marginBottom:8 }}>
+                  Повідомлення
+                </div>
+                <p style={{ fontFamily:"'DM Serif Display',serif", fontSize:'clamp(18px,2.5vw,26px)', color:'#fff0f3', lineHeight:1.3, marginBottom:8 }}>
+                  Онлайн-запис наразі в розробці
+                </p>
+                <p style={{ fontFamily:"'Jost',sans-serif", fontSize:14, color:'rgba(255,240,243,0.5)', fontWeight:300, lineHeight:1.7 }}>
+                  Для запису на процедуру, будь ласка, зателефонуйте нам — ми з радістю вас запишемо
+                </p>
+              </div>
+            </div>
+            <a
+              href="tel:+380676768798"
+              style={{ fontFamily:"'Jost',sans-serif", fontSize:12, letterSpacing:'0.2em', textTransform:'uppercase', background:'#f2a8b6', color:'#1a1a1a', padding:'18px 40px', display:'inline-block', transition:'background 0.3s', whiteSpace:'nowrap', flexShrink:0 }}
+              onMouseEnter={e => e.currentTarget.style.background='#e8899a'}
+              onMouseLeave={e => e.currentTarget.style.background='#f2a8b6'}
+            >
+              +38 (067) 676-87-98
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Stepper */}
       {!done && (
         <section style={{ background:'#fffbf9', borderBottom:'1px solid rgba(242,168,182,0.15)', padding:'24px 80px' }} className="booking-stepper">
